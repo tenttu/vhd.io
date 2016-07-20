@@ -59,6 +59,9 @@ Copy-Item $PSScriptRoot"\root\*" $DataPath -Recurse -Force
 Write-Host "Dismounting VHD"
 Dismount-DiskImage -ImagePath $VhdPath
 
+Write-Host "Optimizing VHD"
+Optimize-VHD -Path $VhdPath -Mode Full
+
 Write-Host "Removing temporary paths"
 Remove-Item -Recurse -Force $DataPath
 Remove-Item -Recurse -Force $CachePath
