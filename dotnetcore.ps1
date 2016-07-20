@@ -54,7 +54,7 @@ Unzip $CachePath"\vscode.zip" $DataPath"\vscode"
 Copy-Item $CachePath\"PortableGit\*" $DataPath\"git" -Recurse -Force
 
 Write-Host "Copying root files"
-Copy-Item $PSScriptRoot"\root" $DataPath -Recurse -Force
+Copy-Item $PSScriptRoot"\root\*" $DataPath -Recurse -Force
 
 Write-Host "Dismounting VHD"
 Dismount-DiskImage -ImagePath $VhdPath
