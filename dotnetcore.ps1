@@ -14,6 +14,11 @@ If (Test-Path $VhdPath)
 {
 	Remove-Item $VhdPath
 }
+$ZipPath = $PSScriptRoot+"\dotnetcore.zip"
+If (Test-Path $ZipPath)
+{
+	Remove-Item $ZipPath
+}
 
 $CachePath = $PSScriptRoot+"\cache"
 Write-Host "Creating Cache location: $CachePath"
@@ -65,5 +70,8 @@ Optimize-VHD -Path $VhdPath -Mode Full
 Write-Host "Removing temporary paths"
 Remove-Item -Recurse -Force $DataPath
 Remove-Item -Recurse -Force $CachePath
+
+Write-Host "Compressing output"
+Compress-Archive $VhdPath -DestinationPath $ZipPath
 
 Write-Host "VHD succesfully created!"
