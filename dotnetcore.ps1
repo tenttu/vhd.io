@@ -1,3 +1,6 @@
+$VhdArch = "x64";
+$VhdVersion = "1.0.0-preview2";
+
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 function Unzip
@@ -9,12 +12,14 @@ function Unzip
 
 Write-Host "Starting .NET Core VHD Setup"
 
-$VhdPath = $PSScriptRoot+"\dotnetcore.vhd"
+$VhdName = "dotnetcore-$VhdArch-$VhdVersion";
+
+$VhdPath = $PSScriptRoot+"\$VhdName.vhd"
 If (Test-Path $VhdPath)
 {
 	Remove-Item $VhdPath
 }
-$ZipPath = $PSScriptRoot+"\dotnetcore.zip"
+$ZipPath = $PSScriptRoot+"\$VhdName.zip"
 If (Test-Path $ZipPath)
 {
 	Remove-Item $ZipPath
