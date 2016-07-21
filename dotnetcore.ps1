@@ -28,6 +28,7 @@ Write-Host "Downloading files"
 Invoke-WebRequest -Uri "https://go.microsoft.com/fwlink/?LinkID=809126" -OutFile $CachePath"\dotnet.zip"
 Invoke-WebRequest -Uri "https://go.microsoft.com/fwlink/?LinkID=623231" -OutFile $CachePath"\vscode.zip"
 Invoke-WebRequest -Uri "https://github.com/git-for-windows/git/releases/download/v2.9.2.windows.1/PortableGit-2.9.2-64-bit.7z.exe" -OutFile $CachePath"\git.7z.exe"
+Invoke-WebRequest -Uri "https://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x64.exe" -OutFile $CachePath"\vc_redist.x64.exe"
 
 $DataPath = $PSScriptRoot+"\data"
 Write-Host "Creating Data location: $DataPath"
@@ -57,6 +58,8 @@ Unzip $CachePath"\vscode.zip" $DataPath"\vscode"
 
 & "$CachePath\git.7z.exe" -y -gm2 -nr | Out-Null
 Copy-Item $CachePath\"PortableGit\*" $DataPath\"git" -Recurse -Force
+
+Copy-Item $CachePath\"vc_redist.x64.exe" $DataPath\"redist" -Recurse -Force
 
 Write-Host "Copying root files"
 Copy-Item $PSScriptRoot"\root\*" $DataPath -Recurse -Force
